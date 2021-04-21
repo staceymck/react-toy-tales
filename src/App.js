@@ -87,8 +87,11 @@ class App extends React.Component{
     })
     .then(data => {
       this.setState(state => {
+        //need to find the index of the toy we're working with so we can insert
+        //the updated version into the right place in the state.toys array
         const i = state.toys.findIndex(t => t.id === data.id)
         return {
+                //[all the toys before the one we updated, the one we updated, all the ones after the one we updated]
           toys: [...state.toys.slice(0, i), data, ...state.toys.slice(i + 1)]
         }
       })
