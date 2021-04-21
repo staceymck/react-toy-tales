@@ -17,7 +17,7 @@ class App extends React.Component{
     this.getToys()
   }
 
-  getToys() {
+  getToys = () => {
     fetch('http://localhost:3000/toys')
     .then(res => res.json())
     .then(data => {
@@ -72,7 +72,9 @@ class App extends React.Component{
         "Content-Type": "application/json",
         "Accepts": "application/json"
       },
-      body: JSON.stringify({likes: toy.likes + 1}) //why this?
+      body: JSON.stringify({likes: toy.likes + 1}) //since it's a patch request,
+      // we only need to send in the info we want to update for the toy,
+      // but we could still send in the full toy if we wanted
     }
     
     fetch(`http://localhost:3000/toys/${id}`, configObj)
